@@ -1,8 +1,13 @@
-from KBNet import get_KBNet
+from DSNet import Conf, MyModel
 from EdgeLoss import get_edge_loss
 import torch
 
-model = get_KBNet(classes=1, bd=4)
+conf = Conf(base_coe=8,
+            encoder='convnext',
+            decoder='mobilenet',
+            early_output=True,
+            fuse_stride2=True)
+model = MyModel(Conf)
 input = torch.randn(4, 1, 224, 224)
 label = torch.randn(4, 1, 224, 224)
 output, *aux = model(input)
